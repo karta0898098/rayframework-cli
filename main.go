@@ -6,14 +6,14 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 	nowVersion := 0.5
 
 	var h bool
 	var v bool
 	var projectName string
 
-	flag.BoolVar(&h, "h",false,"this help")
+	flag.BoolVar(&h, "h", false, "this help")
 	flag.BoolVar(&v, "v", false, "show version and exit")
 	flag.StringVar(&projectName, "create", "", "create new project")
 	flag.Usage = usage
@@ -24,24 +24,25 @@ func main()  {
 		os.Exit(0)
 	}
 	if v {
-		fmt.Printf("rayframework-cli version: %v \n",nowVersion)
+		fmt.Printf("rayframework-cli version: %v \n", nowVersion)
 		os.Exit(0)
 	}
 
-	if projectName == ""{
+	if projectName == "" {
 		fmt.Println("please input project name")
 		os.Exit(0)
 	}
 
-	fmt.Printf("create Project %s \n",projectName)
+	fmt.Printf("create Project %s \n", projectName)
 	createFolderTree(projectName)
 	createConfigCode(projectName)
 	createRouterCode(projectName)
 	createDatabaseCode(projectName)
+	createUtilCode(projectName)
 	createMainCode(projectName)
-	fmt.Printf("create Project %s done \n",projectName)
+	fmt.Printf("create Project %s done \n", projectName)
 }
 
-func usage()  {
+func usage() {
 	flag.PrintDefaults()
 }
