@@ -2,6 +2,7 @@ RayFramework
 ===============
 
 go + gin-gonic + gorm 框架程式碼產生器
+
 ![demo](https://raw.githubusercontent.com/karta0898098/rayframework-cli/master/example/demo.gif)
 
 
