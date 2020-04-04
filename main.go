@@ -39,6 +39,7 @@ func main() {
 	createRouterCode(projectName)
 	createDatabaseCode(projectName)
 	createUtilCode(projectName)
+	createIndexTemplates(projectName)
 	createMainCode(projectName)
 	fmt.Printf("create Project %s done \n", projectName)
 }

@@ -57,7 +57,7 @@ func main() {
 	engine := gin.New()
 
 	//如果./templates沒有檔案 49行會出錯
-	//engine.LoadHTMLGlob("./templates/*.html")
+	engine.LoadHTMLGlob("./templates/*.html")
 
 	engine.Use(gin.Logger(), gin.Recovery())
 	engine.Use(sessions.Sessions("%s", store))

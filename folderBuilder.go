@@ -26,12 +26,14 @@ func createFolderTree(projectName string) {
 	err = os.MkdirAll(path.Join(projectName, "database"), os.ModePerm)
 	err = os.MkdirAll(path.Join(projectName, "pkg", "util"), os.ModePerm)
 	err = os.MkdirAll(path.Join(projectName, "router"), os.ModePerm)
+	err = os.MkdirAll(path.Join(projectName, "templates"), os.ModePerm)
 
 	cmd := exec.Command("go", "mod", "init", projectName)
 	cmd.Dir = workingDir
 	err = cmd.Run()
 
 	fmt.Println("start get go mod package")
+	fmt.Println("download dependency packages need some time")
 	bar := pb.StartNew(len(packages))
 	//建立Project 依賴的套件
 	for i:=0;i<len(packages);i++{

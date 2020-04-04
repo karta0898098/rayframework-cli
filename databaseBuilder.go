@@ -13,7 +13,7 @@ package database
 
 import (
 	"github.com/jinzhu/gorm"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"%s/config"
 	"time"
 )
@@ -22,6 +22,11 @@ var Context *gorm.DB
 
 func NewDatabase(conf config.DataBaseConfig) {
 	var err error
+
+	if conf.User == "" {
+		log.Println("[database] mock data non connect database if you want to connect database please setting db user")
+		return
+	}
 
 	Context, err = gorm.Open("mysql", conf.GetConnString())
 	if err != nil {
