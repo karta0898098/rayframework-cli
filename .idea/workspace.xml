@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a35d4242-2ed4-47c8-9c74-884416e05d11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templatesBuilder.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/databaseBuilder.go" beforeDir="false" afterPath="$PROJECT_DIR$/databaseBuilder.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/folderBuilder.go" beforeDir="false" afterPath="$PROJECT_DIR$/folderBuilder.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainBuilder.go" beforeDir="false" afterPath="$PROJECT_DIR$/mainBuilder.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routerBuilder.go" beforeDir="false" afterPath="$PROJECT_DIR$/routerBuilder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
