@@ -46,7 +46,9 @@ func NewDatabase(conf config.DataBaseConfig) {
 }
 
 func CloseDataBase() {
-	_ = Context.Close()
+	if Context != nil{
+		_ = Context.Close()
+	}
 }`
 
 func createDatabaseCode(projectName string) {
