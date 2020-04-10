@@ -5,6 +5,10 @@ go + gin-gonic + gorm 框架程式碼產生器
 
 ![demo](https://raw.githubusercontent.com/karta0898098/rayframework-cli/master/example/demo.gif)
 
+安裝方法:
+>```
+>go get github.com/karta0898098/rayframework-cli
+>```
 
 使用方法:
 >```
