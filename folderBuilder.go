@@ -1,10 +1,11 @@
-package builder
+package main
 
 import (
 	"fmt"
-	"github.com/cheggaaa/pb/v3"
 	"os"
 	"os/exec"
+
+	"github.com/cheggaaa/pb/v3"
 )
 
 type FolderBuilder struct {

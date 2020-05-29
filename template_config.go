@@ -1,6 +1,6 @@
-package templates
+package main
 
-const Config  =`
+const TemplateConfig  =`
 package config
 
 import (

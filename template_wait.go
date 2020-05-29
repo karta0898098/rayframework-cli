@@ -1,6 +1,6 @@
-package templates
+package main
 
-const WaitForIt  = `#!/usr/bin/env bash
+const TemplateWaitForIt  = `#!/usr/bin/env bash
 # Use this script to test if a given TCP host/port are available
 
 WAITFORIT_cmdname=${0##*/}

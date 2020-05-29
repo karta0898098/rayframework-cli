@@ -1,6 +1,6 @@
-package templates
+package main
 
-const Router = `
+const TemplateRouter = `
 package router
 
 import (

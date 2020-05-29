@@ -1,6 +1,6 @@
-package templates
+package main
 
-const Utility = `
+const TemplateUtility = `
 package util
 
 import (

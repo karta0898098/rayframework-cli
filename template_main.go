@@ -1,6 +1,6 @@
-package templates
+package main
 
-const Main = `
+const TemplateMain = `
 package main
 
 import (

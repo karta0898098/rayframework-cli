@@ -1,6 +1,6 @@
-package templates
+package main
 
-const Database = `
+const TemplateDatabase = `
 package database
 
 import (

@@ -1,6 +1,6 @@
-package templates
+package main
 
-const DockerCompose = `
+const TemplateDockerCompose = `
 version: '3.7'
 
 services: 

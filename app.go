@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path"
-	"rayframework-cli/builder"
-	"rayframework-cli/templates"
+
 )
 
 type AppBuilder struct {
@@ -30,7 +29,7 @@ func (b *AppBuilder) WorkingDir() *AppBuilder {
 }
 
 func (b *AppBuilder) Folder() *AppBuilder {
-	folderBuilder := &builder.FolderBuilder{}
+	folderBuilder := &FolderBuilder{}
 	folderBuilder = folderBuilder.ProjectName(b.projectName)
 	folderBuilder = folderBuilder.WorkingDir(b.workingDir)
 	folderBuilder = folderBuilder.Folder(path.Join(b.projectName, "config"))
@@ -58,8 +57,8 @@ func (b *AppBuilder) Folder() *AppBuilder {
 }
 
 func (b *AppBuilder) Router() *AppBuilder {
-	Builder := &builder.CodeBuilder{
-		Template:    templates.Router,
+	Builder := &CodeBuilder{
+		Template:    TemplateRouter,
 		ProjectName: b.projectName,
 		Path:        "router",
 		File:        "router.go",
@@ -69,8 +68,8 @@ func (b *AppBuilder) Router() *AppBuilder {
 }
 
 func (b *AppBuilder) Util() *AppBuilder {
-	Builder := &builder.CodeBuilder{
-		Template:    templates.Utility,
+	Builder := &CodeBuilder{
+		Template:    TemplateUtility,
 		ProjectName: b.projectName,
 		Path:        "pkg/util",
 		File:        "utility.go",
@@ -80,8 +79,8 @@ func (b *AppBuilder) Util() *AppBuilder {
 }
 
 func (b *AppBuilder) Database() *AppBuilder {
-	Builder := &builder.CodeBuilder{
-		Template:    templates.Database,
+	Builder := &CodeBuilder{
+		Template:    TemplateDatabase,
 		ProjectName: b.projectName,
 		Path:        "database",
 		File:        "database.go",
@@ -91,8 +90,8 @@ func (b *AppBuilder) Database() *AppBuilder {
 }
 
 func (b *AppBuilder) Templates() *AppBuilder {
-	Builder := &builder.CodeBuilder{
-		Template:    templates.Index,
+	Builder := &CodeBuilder{
+		Template:    TemplateIndex,
 		ProjectName: b.projectName,
 		Path:        "templates",
 		File:        "index.html",
@@ -103,18 +102,18 @@ func (b *AppBuilder) Templates() *AppBuilder {
 
 func (b *AppBuilder) Docker() *AppBuilder {
 	if config.UseDockerCompose {
-		waitForItBuilder := &builder.CodeBuilder{
-			Template:    templates.WaitForIt,
+		waitForItBuilder := &CodeBuilder{
+			Template:    TemplateWaitForIt,
 			ProjectName: b.projectName,
 			File:        "wait-for-it.sh",
 		}
-		dockerBuilder := &builder.CodeBuilder{
-			Template:    templates.DockerfileWait,
+		dockerBuilder := &CodeBuilder{
+			Template:    TemplateDockerfileWait,
 			ProjectName: b.projectName,
 			File:        "dockerfile",
 		}
-		sqlBuilder := &builder.CodeBuilder{
-			Template:    fmt.Sprintf(templates.Initdb, b.projectName),
+		sqlBuilder := &CodeBuilder{
+			Template:    fmt.Sprintf(TemplateInitdb, b.projectName),
 			ProjectName: b.projectName,
 			Path:        "sql",
 			File:        "initdb.sql",
@@ -122,16 +121,16 @@ func (b *AppBuilder) Docker() *AppBuilder {
 
 		mysqlPassword := GeneratePassword(16)
 		redisPassword := GeneratePassword(16)
-		dockerComposeBuilder := &builder.CodeBuilder{
-			Template:    fmt.Sprintf(templates.DockerCompose, mysqlPassword, redisPassword, redisPassword, mysqlPassword, b.projectName),
+		dockerComposeBuilder := &CodeBuilder{
+			Template:    fmt.Sprintf(TemplateDockerCompose, mysqlPassword, redisPassword, redisPassword, mysqlPassword, b.projectName),
 			ProjectName: b.projectName,
 			File:        "docker-compose.yml",
 		}
 
 		b.actions = append(b.actions, dockerBuilder, waitForItBuilder, sqlBuilder, dockerComposeBuilder)
 	} else {
-		Builder := &builder.CodeBuilder{
-			Template:    templates.Dockerfile,
+		Builder := &CodeBuilder{
+			Template:    TemplateDockerfile,
 			ProjectName: b.projectName,
 			File:        "dockerfile",
 		}
@@ -141,8 +140,8 @@ func (b *AppBuilder) Docker() *AppBuilder {
 }
 
 func (b *AppBuilder) DockerDB() *AppBuilder {
-	Builder := &builder.CodeBuilder{
-		Template:    templates.Dockerfile,
+	Builder := &CodeBuilder{
+		Template:    TemplateDockerfile,
 		ProjectName: b.projectName,
 		File:        "dockerfile",
 	}
@@ -151,14 +150,14 @@ func (b *AppBuilder) DockerDB() *AppBuilder {
 }
 
 func (b *AppBuilder) Config() *AppBuilder {
-	codeBuilder := &builder.CodeBuilder{
-		Template:    templates.Config,
+	codeBuilder := &CodeBuilder{
+		Template:    TemplateConfig,
 		ProjectName: b.projectName,
 		Path:        "config",
 		File:        "config.go",
 	}
-	iniBuilder := &builder.CodeBuilder{
-		Template:    templates.DefaultIni,
+	iniBuilder := &CodeBuilder{
+		Template:    DefaultIni,
 		ProjectName: b.projectName,
 		File:        "config.ini",
 	}
@@ -167,8 +166,8 @@ func (b *AppBuilder) Config() *AppBuilder {
 }
 
 func (b *AppBuilder) Main() *AppBuilder {
-	Builder := &builder.MainBuilder{
-		Template:    templates.Main,
+	Builder := &MainBuilder{
+		Template:    TemplateMain,
 		ProjectName: b.projectName,
 		File:        "main.go",
 		SessionCode: GeneratePassword(8),

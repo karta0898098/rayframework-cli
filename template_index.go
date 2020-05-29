@@ -1,6 +1,6 @@
-package templates
+package main
 
-const Index = `
+const TemplateIndex = `
 <!DOCTYPE html>
 <html lang="en">
 <head>

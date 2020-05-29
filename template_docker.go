@@ -1,6 +1,6 @@
-package templates
+package main
 
-const Dockerfile = `
+const TemplateDockerfile = `
 FROM golang:1.14.2-alpine3.11 AS builder-env
 
 WORKDIR /app
@@ -30,7 +30,7 @@ EXPOSE 8080
 ENTRYPOINT [ "./app" ]
 `
 
-const DockerfileWait = `
+const TemplateDockerfileWait = `
 FROM golang:1.14.2-alpine3.11 AS builder-env
 
 WORKDIR /app
