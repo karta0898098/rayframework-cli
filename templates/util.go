@@ -1,13 +1,6 @@
-package main
+package templates
 
-import (
-	"io/ioutil"
-	"log"
-	"os"
-	"path"
-)
-
-const UtilCode = `
+const Utility = `
 package util
 
 import (
@@ -24,13 +17,4 @@ func GeneratePassword(n int) string {
 	}
 	return string(b)
 }
-
 `
-
-func createUtilCode(projectName string) {
-	fileName := path.Join(projectName, "pkg", "util", "utiliy.go")
-	err := ioutil.WriteFile(fileName, []byte(UtilCode), os.ModePerm)
-	if err != nil {
-		log.Panic("can't write router.go")
-	}
-}

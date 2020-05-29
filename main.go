@@ -1,49 +1,60 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"github.com/urfave/cli/v2"
 	"os"
 )
 
+type (
+	Config struct {
+		Name             string
+		UseDocker        bool
+		UseDockerCompose bool
+	}
+)
+
+var config Config
+
 func main() {
-	nowVersion := 0.5
-
-	var h bool
-	var v bool
-	var projectName string
-
-	flag.BoolVar(&h, "h", false, "this help")
-	flag.BoolVar(&v, "v", false, "show version and exit")
-	flag.StringVar(&projectName, "create", "", "create new project")
-	flag.Usage = usage
-	flag.Parse()
-
-	if h {
-		flag.Usage()
-		os.Exit(0)
+	app := cli.NewApp()
+	app.Name = "rayframework-cli"
+	app.Usage = ""
+	app.Flags = NewFlag()
+	app.Action = Run
+	err := app.Run(os.Args)
+	if err != nil {
+		fmt.Println("Sorry can't create project reason:", err)
 	}
-	if v {
-		fmt.Printf("rayframework-cli version: %v \n", nowVersion)
-		os.Exit(0)
-	}
-
-	if projectName == "" {
-		fmt.Println("please input project name")
-		os.Exit(0)
-	}
-
-	fmt.Printf("create Project %s \n", projectName)
-	createFolderTree(projectName)
-	createConfigCode(projectName)
-	createRouterCode(projectName)
-	createDatabaseCode(projectName)
-	createUtilCode(projectName)
-	createIndexTemplates(projectName)
-	createMainCode(projectName)
-	fmt.Printf("create Project %s done \n", projectName)
 }
 
-func usage() {
-	flag.PrintDefaults()
+func Run(c *cli.Context) error {
+	config = Config{
+		Name:             c.String("name"),
+		UseDocker:        c.Bool("docker"),
+		UseDockerCompose: c.Bool("docker-compose"),
+	}
+	return Exec()
+}
+
+func Exec() error {
+
+	builder := &AppBuilder{}
+
+	builder = builder.Name(config.Name)
+	builder = builder.WorkingDir()
+	builder = builder.Folder()
+	builder = builder.Database()
+	builder = builder.Router()
+	builder = builder.Util()
+	builder = builder.Templates()
+
+	if config.UseDocker {
+		builder = builder.Docker()
+	}
+
+	builder = builder.Config()
+	builder = builder.Main()
+	builder.Build()
+	return nil
 }

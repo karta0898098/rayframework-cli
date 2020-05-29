@@ -1,16 +1,10 @@
-package main
+package templates
 
-import (
-	"io/ioutil"
-	"log"
-	"os"
-	"path"
-)
-
-const ConfigCodeTemplate = `
+const Config  =`
 package config
 
 import (
+	"os"
 	"fmt"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/ini.v1"
@@ -63,10 +57,20 @@ func NewConfig(path string) Config {
 }
 
 func (d *DataBaseConfig) GetConnString() string {
+	
+	DBConnectionString := os.Getenv("DB_CONNECTION_STRING")
+	if DBConnectionString != "" {
+		return DBConnectionString
+	}
+
+	if d.User == "" || d.Password == "" {
+		return ""
+	}
+
 	return fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", d.User, d.Password, d.Host, d.Port, d.DBName)
 }`
 
-const ConfigIniTemplate  =`
+const DefaultIni  =`
 [database]
 user = ""
 password = ""
@@ -77,17 +81,3 @@ name = ""
 [runtime]
 mode = debug
 port = :8080`
-
-func createConfigCode(projectName string) {
-	fileName := path.Join(projectName, "config", "config.go")
-	iniName := path.Join(projectName, "config.ini")
-	err := ioutil.WriteFile(fileName, []byte(ConfigCodeTemplate), os.ModePerm)
-	if err != nil{
-		log.Panic("can't write config.go")
-	}
-
-	err = ioutil.WriteFile(iniName, []byte(ConfigIniTemplate), os.ModePerm)
-	if err != nil{
-		log.Panic("can't write config.ini")
-	}
-}

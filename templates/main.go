@@ -1,14 +1,6 @@
-package main
+package templates
 
-import (
-	"fmt"
-	"io/ioutil"
-	"log"
-	"os"
-	"path"
-)
-
-const MainCode = `
+const Main = `
 package main
 
 import (
@@ -44,8 +36,9 @@ func main() {
 	setting := config.NewConfig("config.ini")
 
 	//Database連線
-	database.NewDatabase(setting.Database)
-	defer database.CloseDataBase()
+	connectionString := setting.Database.GetConnString()
+	database.NewDatabase(connectionString)
+	defer database.CloseDatabase()
 
 	//設定Gin Mode
 	gin.SetMode(setting.Runtime.Mode)
@@ -71,34 +64,32 @@ func main() {
 		Handler: engine,
 	}
 
-	go func() {
-		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatal(err)
-		}
-	}()
+	done := make(chan bool, 1)
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	go ShutdownServer(server, quit, done)
 
-	quitSignal := make(chan os.Signal,1)
-	signal.Notify(quitSignal,syscall.SIGINT,syscall.SIGTERM)
-	<- quitSignal
+	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		log.Fatalf("Could not listen on  %v\n", err)
+	}
 
+	<-done
+	log.Println("Server is exit")
+}
+
+//ShutdownServer 關閉Server
+func ShutdownServer(server *http.Server, quit <-chan os.Signal, done chan<- bool) {
+	<-quit
 	log.Println("Shutdown Server ...")
 
-	ctx , cancel := context.WithTimeout(context.Background(), 5 *time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
+	server.SetKeepAlivesEnabled(false)
 	if err := server.Shutdown(ctx); err != nil {
 		log.Fatal("Server Shutdown: ", err)
 	}
+	close(done)
+}`
 
-	log.Println("Server exiting")
-}
 
-`
-
-func createMainCode(projectName string) {
-	fileName := path.Join(projectName, "main.go")
-	err := ioutil.WriteFile(fileName, []byte(fmt.Sprintf(MainCode, projectName, projectName, projectName, GeneratePassword(8), projectName)), os.ModePerm)
-	if err != nil {
-		log.Panic("can't write main.go")
-	}
-}

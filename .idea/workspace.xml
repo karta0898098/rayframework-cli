@@ -2,8 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a35d4242-2ed4-47c8-9c74-884416e05d11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/builder/codeBuilder.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/builder/folderBuilder.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/builder/mainBuilder.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flag.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/database.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/docker.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/docker_compose.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/index.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/router.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sql.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/util.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/wait.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/databaseBuilder.go" beforeDir="false" afterPath="$PROJECT_DIR$/databaseBuilder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configBuilder.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/databaseBuilder.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/folderBuilder.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainBuilder.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routerBuilder.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templatesBuilder.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilBuilder.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +38,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Go File" />
         <option value="HTML File" />
+        <option value="Go File" />
       </list>
     </option>
   </component>
@@ -45,7 +70,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -53,6 +78,11 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="terminal" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Builder" />
+    </key>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
